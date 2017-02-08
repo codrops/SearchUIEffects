@@ -1,0 +1,211 @@
+/* Layout for search container */
+.search {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.js .search {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.btn--search-close {
+	font-size: 2em;
+	position: absolute;
+	top: 1.25em;
+	right: 1.25em;
+	display: none;
+}
+
+.js .btn--search-close {
+	display: block;
+}
+
+.search__form {
+	margin: 0 auto;
+	padding: 0 1em;
+}
+
+.search__input {
+	font-family: inherit;
+	font-size: 7vw;
+	line-height: 1;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 75%;
+	max-width: 900px;
+	padding: 0 0 0.1em;
+	color: #5c32f2;
+	border-bottom: 6px solid;
+}
+
+.search__input::-webkit-input-placeholder {
+	/* WebKit, Blink, Edge */
+	color: #5c32f2;
+}
+
+.search__input::-moz-placeholder {
+	opacity: 1;
+	/* Mozilla Firefox 19+ */
+	color: #5c32f2;
+}
+
+.search__input:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: #5c32f2;
+}
+
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+.search__input::-ms-clear {
+	display: none;
+}
+
+.search__info {
+	font-size: 90%;
+	font-weight: bold;
+	display: block;
+	width: 75%;
+	margin: 0 auto;
+	padding: 0.85em 0;
+	text-align: right;
+	color: #5c32f2;
+}
+
+/* Dummy pages behind the main element that will animate like cards */
+.page {
+	position: relative;
+	perspective: 1000px;
+}
+
+.page__single--dummy {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #f7f7f7;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: 75% auto;
+}
+
+.page__single:first-child {
+	background-image: url(../img/bg_7.svg);
+}
+
+.page__single:nth-child(2) {
+	background-image: url(../img/bg_10.svg);
+}
+
+.page__single:nth-child(3) {
+	background-image: url(../img/bg_3.svg);
+}
+
+.page__single:nth-child(4) {
+	background-image: url(../img/bg_11.svg);
+}
+
+/************************/
+/* Transitions 			*/
+/************************/
+
+.js .page--move {
+	pointer-events: none;
+}
+
+.js .page__single {
+	transition: transform 0.7s;
+	transition-timing-function: cubic-bezier(0.4, 1, 0.3, 1);
+}
+
+.page--move .page__single {
+	transition-duration: 1.5s;
+}
+
+.js .page__single--dummy {
+	transform: translate3d(0, 0, -600px);
+}
+
+.page--move .page__single:first-child {
+	transform: translate3d(-20%, 100%, -3000px) rotate3d(0,0,1, -22deg);
+	transition-duration: 1.8s;
+}
+
+.page--move .page__single:nth-child(2) {
+	transform: translate3d(100%, 15%, -3500px) rotate3d(0,0,1, 30deg);
+	transition-duration: 2s;
+}
+
+.page--move .page__single:nth-child(3) {
+	transform: translate3d(-160%, 0%, -4500px) rotate3d(0,0,1, 10deg);
+	transition-duration: 2.3s;
+}
+
+.page--move .page__single:nth-child(4) {
+	transform: translate3d(-70%, -150%, -5000px) rotate3d(0,0,1, -10deg);
+	transition-duration: 1.7s;
+}
+
+.page--move .page__single:nth-child(5) {
+	/* main wrap */
+	transform: translate3d(0, 0, -2500px) rotate3d(0,0,1, 3deg);
+}
+
+.js .search {
+	pointer-events: none;
+	transform-style: preserve-3d;
+}
+
+.js .search--open {
+	pointer-events: auto;
+}
+
+/* Close button */
+.btn--search-close {
+	opacity: 0;
+	transform: scale3d(0.8, 0.8, 1);
+	transition: opacity 0.5s, transform 0.5s;
+}
+
+.search--open .btn--search-close {
+	opacity: 1;
+	transform: scale3d(1, 1, 1);
+}
+
+/* Search input */
+.js .search__form {
+	opacity: 0;
+	transform: translate3d(0,0,600px);
+}
+
+.js .search--open .search__form {
+	opacity: 1;
+	transform: translate3d(0,0,0);
+	transition: opacity 1.2s, transform 1.2s;
+	transition-delay: 0.3s;
+	transition-timing-function: cubic-bezier(0.4, 1, 0.3, 1);
+}
+
+@media screen and (max-width: 40em) {
+	.btn--search-close {
+		font-size: 1.25em;
+	}
+	.search__input {
+		font-size: 2em;
+		width: 100%;
+	}
+	.search__info {
+		width: 100%;
+		text-align: center;
+	}
+}

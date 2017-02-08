@@ -1,0 +1,249 @@
+/* Layout for search container */
+.search {
+	position: relative;
+	text-align: center;
+}
+
+.js .search {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+	width: 100%;
+	height: 100vh;
+}
+
+.js .search::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	pointer-events: none;
+	background: rgba(0,0,0,0.3);
+}
+
+.search__inner {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 50%;
+	background: #f0f0f0;
+}
+
+.search__inner--up {
+	color: #dce6e6;
+	background: #2d3535;
+}
+
+.search__inner--down {
+	top: 50%;
+	color: #dce6e6;
+	background: #22d2d2;
+}
+
+.btn--search-close {
+	font-size: 2em;
+	position: absolute;
+	z-index: 100;
+	top: 1.25em;
+	right: 1.25em;
+	display: none;
+}
+
+.js .btn--search-close {
+	display: block;
+}
+
+.search__form {
+	width: 75%;
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.search__input {
+	font-family: inherit;
+	font-size: 7vw;
+	line-height: 1;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 100%;
+	padding: 0 0 0.1em 0;
+	color: inherit;
+	border-bottom: 4px solid;
+}
+
+.search__input::-webkit-input-placeholder {
+	opacity: 0.1;
+	/* WebKit, Blink, Edge */
+	color: #fff;
+}
+
+.search__input::-moz-placeholder {
+	opacity: 0.1;
+	/* Mozilla Firefox 19+ */
+	color: #fff;
+}
+
+.search__input:-ms-input-placeholder {
+	opacity: 0.1;
+	/* Internet Explorer 10-11 */
+	color: #fff;
+}
+
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+.search__input::-ms-clear {
+	display: none;
+}
+
+.search__info {
+	font-size: 90%;
+	font-weight: bold;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0.85em 0;
+	text-align: right;
+}
+
+.search__related {
+	display: flex;
+	width: 75%;
+	max-width: 900px;
+	pointer-events: none;
+}
+
+.search__suggestion {
+	width: 50%;
+	padding: 0 1em 0 0;
+	text-align: left;
+}
+
+.search__suggestion:last-child {
+	padding: 0 0 0 1em;
+}
+
+.search__suggestion h3 {
+	font-size: 1.35em;
+	margin: 0;
+}
+
+.search__suggestion h3::before {
+	content: '\21FE';
+	display: inline-block;
+	padding: 0 0.5em 0 0;
+}
+
+.search__suggestion p {
+	font-size: 1.15em;
+	line-height: 1.4;
+	margin: 0.75em 0 0 0;
+}
+
+/************************/
+/* Transitions 			*/
+/************************/
+
+.js .main-wrap {
+	transition: transform 0.6s, opacity 0.6s;
+	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+
+.js .main-wrap--hide {
+	opacity: 0;
+	transform: scale3d(0.8,0.8,1);
+}
+
+.js .search {
+	pointer-events: none;
+}
+
+.js .search--open {
+	pointer-events: auto;
+}
+
+.js .search::before {
+	opacity: 0;
+	transition: opacity 0.6s;
+	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+
+.js .search--open::before {
+	opacity: 1;
+}
+
+/* Search button */
+.btn--search {
+	transition: opacity 0s;
+}
+
+.main-wrap--hide .btn--search {
+	opacity: 0;
+	transition-delay: 0s;
+}
+
+/* Close button */
+.btn--search-close {
+	opacity: 0;
+	transform: scale3d(0.8, 0.8, 1);
+	transition: opacity 0.6s, transform 0.6s;
+	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+
+.search--open .btn--search-close {
+	opacity: 1;
+	transform: scale3d(1, 1, 1);
+}
+
+/* Halfs */
+.js .search__inner {
+	transition: transform 0.6s;
+	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+
+.js .search__inner--up {
+	transform: translate3d(0,-100%,0);
+}
+
+.js .search__inner--down {
+	transform: translate3d(0,100%,0);
+}
+
+.js .search--open .search__inner {
+	transform: translate3d(0,0,0);
+}
+
+.js .search__suggestion {
+	transform: translate3d(0,150px,0);
+	transition: transform 1s;
+	transition-timing-function: cubic-bezier(0.2,1,0.3,1);
+}
+
+.js .search--open .search__suggestion {
+	transform: translate3d(0,0,0);
+	transition-delay: 0.05s;
+}
+
+.js .search--open .search__suggestion:last-child {
+	transition-delay: 0.1s;
+}
+
+@media screen and (max-width: 40em) {
+	.btn--search-close {
+		font-size: 1.25em;
+	}
+	.search__suggestion {
+		width: 100%;
+	}
+	.search__suggestion:last-child {
+		display: none;
+	}
+}

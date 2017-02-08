@@ -1,0 +1,258 @@
+/* Layout for search container */
+.search {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	padding: 3em;
+}
+
+.js .search {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+}
+
+.btn--search-close {
+	font-size: 2em;
+	position: absolute;
+	top: 1.25em;
+	right: 1.25em;
+	display: none;
+}
+
+.js .btn--search-close {
+	display: block;
+}
+
+.terminal__line {
+	line-height: 1.25;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	margin: 0;
+	white-space: nowrap;
+}
+
+.search__form::before {
+	content: '>';
+}
+
+.search__input {
+	font-family: inherit;
+	line-height: 1;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 0.05em 0;
+	color: #fff;
+}
+
+.search__form::before,
+.terminal__line,
+.search__input {
+	font-family: 'VT323', monospace;
+	font-size: 1.25em;
+}
+
+.search__input::-webkit-input-placeholder {
+	/* WebKit, Blink, Edge */
+	color: #4a319e;
+}
+
+.search__input::-moz-placeholder {
+	opacity: 1;
+	/* Mozilla Firefox 19+ */
+	color: #4a319e;
+}
+
+.search__input:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: #4a319e;
+}
+
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+.search__input::-ms-clear {
+	display: none;
+}
+
+/************************/
+/* Transitions 			*/
+/************************/
+
+.js .main-wrap {
+	transition: opacity 0.3s;
+}
+
+.js .main-wrap--hide {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.js .main-wrap--move .btn--search {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.js .search {
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.js .search--open {
+	pointer-events: auto;
+	opacity: 1;
+}
+
+.js .search--open .terminal__line:first-child {
+	width: 20ch;
+}
+.js .search--open .terminal__line:nth-child(2),
+.js .search--open .terminal__line:nth-child(3) {
+	width: 27ch;
+}
+.js .search--open .terminal__line:nth-child(4) {
+	width: 28ch;
+}
+.js .search--open .terminal__line:nth-child(5) {
+	width: 7ch;
+}
+.js .search--open .terminal__line:nth-child(6) {
+	width: 16ch;
+}
+.js .search--open .terminal__line:nth-child(7) {
+	width: 14ch;
+}
+.js .search--open .terminal__line:nth-child(8) {
+	width: 19ch;
+}
+.js .search--open .terminal__line:nth-child(9) {
+	width: 10ch;
+}
+.js .search--open .terminal__line:nth-child(10) {
+	width: 13ch;
+}
+.js .search--open .terminal__line:nth-child(11) {
+	width: 12ch;
+}
+
+.js .search--open .terminal__line {
+	animation: typing 1s steps(30, end), scaleUp 0.1s forwards;
+}
+
+.js .search--open .terminal__line:first-child {
+	animation-timing-function: steps(20, end), ease;
+}
+
+.js .search--open .terminal__line:nth-child(2) {
+	animation-delay: 2s;
+}
+
+.js .search--open .terminal__line:nth-child(3) {
+	animation-delay: 3.35s;
+}
+
+.js .search--open .terminal__line:nth-child(2),
+.js .search--open .terminal__line:nth-child(3) {
+	animation-duration: 1.35s, 0.1s;
+	animation-timing-function: steps(27, end), ease;
+}
+
+.js .search--open .terminal__line:nth-child(4) {
+	animation-duration: 1.4s, 0.1s;
+	animation-timing-function: steps(28, end), ease;
+	animation-delay: 6.35s;
+}
+
+.js .search--open .terminal__line:nth-child(5) {
+	animation-duration: 0.35s, 0.1s;
+	animation-timing-function: steps(7, end), ease;
+	animation-delay: 7.75s;
+}
+
+.js .search--open .terminal__line:nth-child(6) {
+	animation-duration: 0.8s, 0.1s;
+	animation-timing-function: steps(16, end), ease;
+	animation-delay: 8.1s;
+}
+
+.js .search--open .terminal__line:nth-child(7) {
+	animation-duration: 0.7s, 0.1s;
+	animation-timing-function: steps(14, end), ease;
+	animation-delay: 8.9s;
+}
+
+.js .search--open .terminal__line:nth-child(8) {
+	animation-duration: 0.95s, 0.1s;
+	animation-timing-function: steps(19, end), ease;
+	animation-delay: 9.6s;
+}
+
+.js .search--open .terminal__line:nth-child(9) {
+	animation-duration: 0.5s, 0.1s;
+	animation-timing-function: steps(10, end), ease;
+	animation-delay: 10.55s;
+}
+
+.js .search--open .terminal__line:nth-child(10) {
+	animation-duration: 0.65s, 0.1s;
+	animation-timing-function: steps(13, end), ease;
+	animation-delay: 11.05s;
+}
+
+.js .search--open .terminal__line:nth-child(11) {
+	animation-duration: 0.6s, 0.1s;
+	animation-timing-function: steps(12, end), ease;
+	animation-delay: 11.7s;
+}
+
+/* Type animation by Lea Verou http://lea.verou.me/2012/02/simpler-css-typing-animation-with-the-ch-unit/ */
+@keyframes typing {
+	from {
+		width: 0;
+	}
+}
+
+@keyframes scaleUp {
+	from {
+		height: 0;
+	} to {
+		height: 1.5em;
+	}
+}
+
+/* Close button */
+.btn--search-close {
+	opacity: 0;
+	transition: opacity 0.5s;
+}
+
+.search--open .btn--search-close {
+	opacity: 1;
+}
+
+/* Search form with input and description */
+
+.js .search__form {
+	opacity: 0;
+}
+
+.js .search--open .search__form {
+	opacity: 1;
+	transition: opacity 0.3s 3.35s;
+}
+
+@media screen and (max-width: 40em) {
+	.btn--search-close {
+		font-size: 1.25em;
+	}
+	.search {
+		padding: 0.5em;
+	}
+}

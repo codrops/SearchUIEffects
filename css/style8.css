@@ -1,0 +1,265 @@
+/* Layout for search container */
+.search {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.js .search {
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+}
+
+.js .search::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.4);
+}
+
+.btn--search-close {
+	font-size: 2em;
+	position: absolute;
+	top: 1.25em;
+	right: 1.25em;
+	display: none;
+}
+
+.js .btn--search-close {
+	display: block;
+}
+
+.search__form {
+	position: relative;
+	margin: 5em 0 2em;
+}
+
+.search__form-inner {
+	position: relative;
+	z-index: 10;
+	overflow: hidden;
+}
+
+.js .search__form-inner::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 20%;
+	width: 60%;
+	height: 105%;
+	background: #eaba82;
+}
+
+.search__input {
+	font-family: inherit;
+	font-size: 6vw;
+	line-height: 1;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 60%;
+	padding: 0.25em;
+	text-align: center;
+	color: #fff;
+	border: none;
+	background: #242963;
+}
+
+.search__input::-webkit-input-placeholder {
+	/* WebKit, Blink, Edge */
+	color: #181c4d;
+}
+
+.search__input::-moz-placeholder {
+	opacity: 1;
+	/* Mozilla Firefox 19+ */
+	color: #181c4d;
+}
+
+.search__input:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: #181c4d;
+}
+
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+.search__input::-ms-clear {
+	display: none;
+}
+
+.search__info {
+	font-size: 90%;
+	font-weight: bold;
+	position: relative;
+	z-index: 9;
+	display: block;
+	width: 100%;
+	padding: 0.85em 0;
+	color: #eaba82;
+}
+
+.search__related {
+	width: 25%;
+	pointer-events: none;
+}
+
+.search__suggestion h3 {
+	font-size: 1.35em;
+	margin: 0;
+}
+
+.search__suggestion h3::before {
+	content: '\21FE';
+	display: inline-block;
+	padding: 0 0.5em 0 0;
+}
+
+.search__suggestion p {
+	font-size: 1.15em;
+	line-height: 1.4;
+	margin: 0.75em 0 0 0;
+}
+
+/************************/
+/* Transitions 			*/
+/************************/
+
+.js .main-wrap {
+	position: relative;
+	transition: transform 0.4s, opacity 0.4s;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.js .main-wrap--move {
+	opacity: 0;
+	transform: scale3d(0.9,0.9,1);
+}
+
+.js .main-wrap--move .btn--search {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.js .search {
+	pointer-events: none;
+}
+
+.js .search--open {
+	pointer-events: auto;
+}
+
+.js .search::before {
+	opacity: 0;
+	transition: opacity 0.4s;
+}
+
+.js .search--open::before {
+	opacity: 1;
+}
+
+/* Close button */
+.btn--search-close {
+	opacity: 0;
+	transition: opacity 0.4s;
+}
+
+.search--open .btn--search-close {
+	opacity: 1;
+}
+
+/* Search form with input and description */
+.search__suggestion,
+.search__info {
+	opacity: 0;
+	transform: translate3d(0, -50px, 0);
+	transition: opacity 0.4s, transform 0.4s;
+}
+
+.search--open .search__suggestion,
+.search--open .search__info {
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+	transition-delay: 0.4s;
+	transition-timing-function: ease-out;
+}
+
+.js .search__form-inner::after {
+	opacity: 0;
+	transform-origin: 50% 0;
+}
+
+.js .search--open .search__form-inner::after {
+	animation: scaleUpDown 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes scaleUpDown {
+	0% {
+		opacity: 1;
+		transform: scale3d(1,0,1);
+	}
+	50% {
+		transform: scale3d(1,1,1);
+		transform-origin: 50% 0;
+		transition-timing-function: ease-out;
+	}
+	50.1% {
+		transform-origin: 50% 100%;
+		transition-timing-function: ease-out;
+	}
+	100% {
+		opacity: 1;
+		transform: scale3d(1,0,1);
+		transform-origin: 50% 100%;
+		transition-timing-function: ease-out;
+	}
+}
+
+.js .search__form-inner {
+	transform: translate3d(0,-50px,0);
+	transition: transform 0.4s;
+}
+
+.js .search--open .search__form-inner {
+	transform: translate3d(0,0,0);
+	transition: none;
+}
+
+.js .search__input {
+	opacity: 0;
+	transition: opacity 0.4s;
+}
+
+.js .search--open .search__input {
+	opacity: 1;
+	transition: opacity 0s 0.4s;
+}
+
+@media screen and (max-width: 40em) {
+	.btn--search-close {
+		font-size: 1em;
+	}
+	.search__form {
+		margin: 2em 0;
+	}
+	.search__related {
+		font-size: 85%;
+		width: 100%;
+		padding: 0 1em;
+	}
+	.search__input,
+	.js .search__form-inner::after {
+		width: 100%;
+		left: 0;
+	}
+}

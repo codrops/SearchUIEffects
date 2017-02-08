@@ -1,0 +1,191 @@
+/* Layout for search container */
+.search {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.js .search {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50vh;
+}
+
+.btn--search-close {
+	font-size: 2em;
+	position: absolute;
+	top: 1.25em;
+	right: 1.25em;
+	display: none;
+}
+
+.js .btn--search-close {
+	display: block;
+}
+
+.search__form {
+	margin: 5em 0;
+}
+
+.search__input {
+	font-family: inherit;
+	font-size: 7vw;
+	line-height: 1;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 75%;
+	max-width: 900px;
+	padding: 0 0 0.1em;
+	color: #fff59a;
+	border-bottom: 6px solid;
+}
+
+.search__input::-webkit-input-placeholder {
+	/* WebKit, Blink, Edge */
+	color: #fff59a;
+}
+
+.search__input::-moz-placeholder {
+	opacity: 1;
+	/* Mozilla Firefox 19+ */
+	color: #fff59a;
+}
+
+.search__input:-ms-input-placeholder {
+	/* Internet Explorer 10-11 */
+	color: #fff59a;
+}
+
+.search__input::-webkit-search-cancel-button,
+.search__input::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+.search__input::-ms-clear {
+	display: none;
+}
+
+.search__info {
+	font-size: 90%;
+	font-weight: bold;
+	display: block;
+	width: 75%;
+	margin: 0 auto;
+	padding: 0.85em 0;
+	text-align: right;
+	color: #ab3a3a;
+}
+
+/* Dummy pages behind the main element that will animate like cards */
+.page {
+	position: relative;
+	perspective: 1200px;
+
+	perspective-origin: 50% -50%;
+}
+
+.page__folder--dummy {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.page__folder:first-child {
+	background: #ffb570;
+}
+
+.page__folder:nth-child(2) {
+	background: #ffd27b;
+}
+
+.page__folder:nth-child(3) {
+	background: #ffe38a;
+}
+
+/************************/
+/* Transitions 			*/
+/************************/
+
+.js .page--move {
+	pointer-events: none;
+}
+
+.js .page__folder {
+	transition: transform 1s;
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.js .page__folder--dummy {
+	transform: translate3d(0px, 100vh, 0);
+}
+
+.page--move .page__folder:first-child {
+	transform: translate3d(0px, 75vh, -300px);
+}
+
+.page--move .page__folder:nth-child(2) {
+	transform: translate3d(0px, 75vh, -250px);
+}
+
+.page--move .page__folder:nth-child(3) {
+	transform: translate3d(0px, 75vh, -200px);
+}
+
+.page--move .page__folder:nth-child(4) {
+	transform: translate3d(0px, 75vh, -150px);
+}
+
+.js .search {
+	pointer-events: none;
+}
+
+.js .search--open {
+	pointer-events: auto;
+}
+
+/* Close button */
+.btn--search-close {
+	opacity: 0;
+	transform: scale3d(0.8, 0.8, 1);
+	transition: opacity 0.5s, transform 0.5s;
+}
+
+.search--open .btn--search-close {
+	opacity: 1;
+	transform: scale3d(1, 1, 1);
+}
+
+/* Search input */
+.js .search__form,
+.js .search__info {
+	opacity: 0;
+	transform: translate3d(0,150px,0);
+	transition: opacity 1s, transform 1s;
+	transition-timing-function: cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.js .search__info {
+	transform: translate3d(0,20px,0);
+}
+
+.js .search--open .search__form,
+.js .search--open .search__info {
+	opacity: 1;
+	transform: translate3d(0,0,0);
+}
+
+.js .search--open .search__info {
+	transition-delay: 0.35s;
+}
+
+@media screen and (max-width: 40em) {
+	.btn--search-close {
+		font-size: 1.25em;
+	}
+}
