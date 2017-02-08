@@ -16,7 +16,8 @@
 		openCtrl = document.getElementById('btn-search'),
 		closeCtrl = document.getElementById('btn-search-close'),
 		searchContainer = document.querySelector('.search'),
-		inputSearch = searchContainer.querySelector('.search__input');
+		inputSearch = searchContainer.querySelector('.search__input'),
+		lastFocusedElement;
 
 	function init() {
 		initEvents();	
@@ -34,6 +35,7 @@
 	}
 
 	function openSearch() {
+		lastFocusedElement = document.activeElement;
 		mainContainer.classList.add('main-wrap--move');
 		searchContainer.classList.add('search--open');
 		inputSearch.focus();
@@ -44,6 +46,9 @@
 		searchContainer.classList.remove('search--open');
 		inputSearch.blur();
 		inputSearch.value = '';
+		if (lastFocusedElement) { // restore focus
+			lastFocusedElement.focus();
+		}
 	}
 
 	init();
