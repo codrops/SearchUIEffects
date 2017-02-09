@@ -1,0 +1,12 @@
+# EditorConfig is awesome: http://EditorConfig.org
+
+#
+root = true
+
+# all files
+[*]
+end_of_line = lf
+insert_final_newline = false
+indent_style = tab
+charset = utf-8
+trim_trailing_whitespace = false
